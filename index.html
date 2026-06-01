@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JANGRE 중간발표</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+body { background:#0f0e17; color:#eaeaea; font-family:'Segoe UI',sans-serif; }
+
+.slide {
+  height:100vh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px;
+  border-bottom:1px solid #1a1a2e;
+}
+
+/* ── 슬라이드 1 타이틀 ── */
+#s1 { text-align:center; background:radial-gradient(ellipse at center, #1a0a1a 0%, #0f0e17 70%); }
+.title { font-size:80px; font-weight:900; letter-spacing:-4px;
+  background:linear-gradient(135deg,#e94560,#e2c27d,#4ecca3);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.subtitle { font-size:18px; color:#888; margin:12px 0 48px; letter-spacing:2px; }
+.info { display:flex; gap:40px; color:#ccc; font-size:14px; }
+.info span { color:#888; font-size:11px; display:block; margin-bottom:4px; letter-spacing:1px; }
+
+/* ── 슬라이드 2 문제/비전 ── */
+#s2 { background:#0f0e17; }
+.s-wrap { width:100%; max-width:900px; }
+.s-label { font-size:11px; letter-spacing:3px; color:#e94560; text-transform:uppercase; margin-bottom:16px; }
+.s-title { font-size:40px; font-weight:800; margin-bottom:32px; line-height:1.2; }
+.cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+.card { background:#1a1a2e; border:1px solid #0f3460; border-radius:12px; padding:20px; }
+.card .ci { font-size:28px; margin-bottom:8px; }
+.card h3 { font-size:13px; color:#e94560; font-weight:700; letter-spacing:1px; margin-bottom:6px; }
+.card p  { font-size:13px; color:#888; line-height:1.6; }
+.vision { background:linear-gradient(135deg,rgba(233,69,96,.1),rgba(78,204,163,.06));
+  border:1px solid rgba(233,69,96,.3); border-radius:12px;
+  padding:22px 28px; display:flex; align-items:center; gap:16px; }
+.vision .vi { font-size:40px; }
+.vision h3 { font-size:10px; color:#e94560; letter-spacing:3px; margin-bottom:6px; }
+.vision p  { font-size:16px; font-weight:600; line-height:1.5; }
+.vision strong { color:#4ecca3; }
+
+/* ── 슬라이드 3 WBS ── */
+#s3 { background:#0a0a14; }
+table { width:100%; border-collapse:separate; border-spacing:0 6px; max-width:900px; }
+th { font-size:10px; color:#555; letter-spacing:2px; padding:0 16px 10px; text-align:left; }
+tr.r { background:#1a1a2e; border-radius:8px; }
+tr.r td { padding:14px 16px; font-size:13px; }
+tr.r td:first-child { border-radius:8px 0 0 8px; }
+tr.r td:last-child  { border-radius:0 8px 8px 0; }
+.wb { background:rgba(233,69,96,.15); color:#e94560; border:1px solid rgba(233,69,96,.3);
+  border-radius:6px; padding:3px 10px; font-size:11px; font-weight:700; }
+.ph { font-weight:700; }
+.ta { color:#666; font-size:12px; }
+.done { color:#4ecca3; } .wip { color:#e2c27d; } .plan { color:#444; }
+
+/* ── 슬라이드 4 아키텍처 ── */
+#s4 { background:#0f0e17; }
+.mbox { background:#1a1a2e; border:1px solid #0f3460; border-radius:16px;
+  padding:32px; margin-top:20px; max-width:860px; width:100%; }
+.mbox svg { max-width:100%; }
+.chips { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:18px; }
+.chip { background:#1a1a2e; border:1px solid #0f3460; border-radius:8px;
+  padding:8px 16px; font-size:12px; font-weight:600; }
+.chip small { color:#555; margin-left:6px; }
+
+/* 네비 힌트 */
+.hint { position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+  font-size:11px; color:#333; letter-spacing:1px; }
+</style>
+</head>
+<body>
+
+<!-- ══ 슬라이드 1 ══ -->
+<section class="slide" id="s1">
+  <div class="title">JANGRE</div>
+  <div class="subtitle">텍스트 RPG · 중간발표 · 10주차</div>
+  <div class="info">
+    <div><span>DEVELOPER</span>Jaeho · 2024136091</div>
+    <div><span>PLATFORM</span>Flutter (Android · iOS)</div>
+    <div><span>PROGRESS</span><b style="color:#4ecca3">Must 100% 완료</b></div>
+    <div><span>TOOL</span>Claude Code</div>
+  </div>
+</section>
+
+<!-- ══ 슬라이드 2 ══ -->
+<section class="slide" id="s2">
+  <div class="s-wrap">
+    <div class="s-label">Problem &amp; Vision</div>
+    <div class="s-title">모바일 RPG의<br><span style="color:#e94560">과금·광고 문제</span></div>
+    <div class="cards">
+      <div class="card"><div class="ci">💸</div><h3>과금·광고 중심</h3><p>순수하게 스토리에 집중하기 어렵습니다.</p></div>
+      <div class="card"><div class="ci">⏱️</div><h3>완결 없는 게임</h3><p>짧은 이동 시간에 한 판을 끝낼 수 없습니다.</p></div>
+      <div class="card"><div class="ci">🎭</div><h3>선택의 의미 없음</h3><p>선택해도 결과가 같아서 몰입이 안 됩니다.</p></div>
+      <div class="card"><div class="ci">📵</div><h3>오프라인 불가</h3><p>상시 인터넷 연결이 필요합니다.</p></div>
+    </div>
+    <div class="vision">
+      <div class="vi">⚔️</div>
+      <div>
+        <h3>VISION</h3>
+        <p>선택이 캐릭터를 성장시키고 세계를 바꾸는 <strong>모바일 텍스트 RPG</strong><br>
+        5~10분 완결 · 엔딩 5종 · 오프라인 완전 지원</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 슬라이드 3 ══ -->
+<section class="slide" id="s3">
+  <div class="s-label" style="max-width:900px;width:100%">WBS · 7주 개발 일정</div>
+  <table>
+    <thead><tr><th>주차</th><th>Phase</th><th>주요 산출물</th><th>상태</th></tr></thead>
+    <tbody>
+      <tr class="r"><td><span class="wb">9W</span></td><td class="ph">기획</td><td class="ta">비전 · 요구사항(MoSCoW) · 주제 선정</td><td class="done">✔ 완료</td></tr>
+      <tr class="r"><td><span class="wb">10W</span></td><td class="ph">설계·발표</td><td class="ta">WBS · 아키텍처 · ADR 3개 · GitHub Pages</td><td class="wip">▶ 진행중</td></tr>
+      <tr class="r"><td><span class="wb">11W</span></td><td class="ph">Must 구현</td><td class="ta">캐릭터 스탯 · 스토리 분기 · 전투 · 인벤토리 · 엔딩 3종</td><td class="done">✔ 완료 ✨</td></tr>
+      <tr class="r"><td><span class="wb">12W</span></td><td class="ph">Should 구현</td><td class="ta">Hive 저장·불러오기 · 단위 테스트</td><td class="plan">○ 예정</td></tr>
+      <tr class="r"><td><span class="wb">13W</span></td><td class="ph">품질</td><td class="ta">밸런스 튜닝 · 버그 수정</td><td class="plan">○ 예정</td></tr>
+      <tr class="r"><td><span class="wb">14W</span></td><td class="ph">배포</td><td class="ta">APK 릴리즈 · GitHub Releases</td><td class="plan">○ 예정</td></tr>
+      <tr class="r"><td><span class="wb">15W</span></td><td class="ph">최종 발표</td><td class="ta">실기기 데모 · 최종 발표</td><td class="plan">○ 예정</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ══ 슬라이드 4 ══ -->
+<section class="slide" id="s4">
+  <div style="max-width:860px;width:100%;text-align:center">
+    <div class="s-label">Architecture · Mermaid</div>
+    <div class="s-title" style="font-size:32px">4레이어 아키텍처</div>
+    <div class="mbox">
+      <div class="mermaid">
+%%{init:{'theme':'dark','themeVariables':{'primaryColor':'#16213e','primaryTextColor':'#eaeaea','primaryBorderColor':'#0f3460','lineColor':'#e94560','background':'#1a1a2e','mainBkg':'#16213e'}}}%%
+graph TD
+  UI["🖥️ Presentation\n화면 7개 — Flutter 위젯"]
+  APP["⚙️ Application\nRiverpod Notifier 3개"]
+  DOMAIN["🧠 Domain — 순수 Dart\nCombatService · StoryEngine"]
+  DATA["💾 Data\nHive 오프라인 저장 (슬롯 3개)"]
+
+  UI -->|"상태 구독"| APP
+  APP -->|"로직 호출"| DOMAIN
+  DOMAIN -->|"저장·불러오기"| DATA
+
+  style UI     fill:#1e1b2e,stroke:#e94560,color:#eaeaea
+  style APP    fill:#1a1a30,stroke:#e2c27d,color:#eaeaea
+  style DOMAIN fill:#0f1e1a,stroke:#4ecca3,color:#eaeaea
+  style DATA   fill:#0f1525,stroke:#4ecca3,color:#eaeaea
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip">Flutter <small>크로스플랫폼</small></div>
+      <div class="chip">Riverpod <small>상태 관리</small></div>
+      <div class="chip">Hive <small>오프라인 저장</small></div>
+    </div>
+  </div>
+</section>
+
+<div class="hint">↓ 스크롤 또는 화살표 키</div>
+
+<script>
+mermaid.initialize({startOnLoad:true, theme:'dark'});
+document.addEventListener('keydown', e => {
+  const cur = Math.round(window.scrollY / window.innerHeight);
+  const total = document.querySelectorAll('.slide').length;
+  if (['ArrowDown',' '].includes(e.key)) { e.preventDefault(); if(cur<total-1) window.scrollTo({top:(cur+1)*window.innerHeight,behavior:'smooth'}); }
+  if (e.key==='ArrowUp') { e.preventDefault(); if(cur>0) window.scrollTo({top:(cur-1)*window.innerHeight,behavior:'smooth'}); }
+});
+</script>
+</body>
+</html>
