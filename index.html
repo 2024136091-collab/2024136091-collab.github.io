@@ -21,14 +21,16 @@ div.marpit > svg > foreignObject > section{width:1280px;height:720px;box-sizing:
 
 
 svg[data-marpit-svg] {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
   width: 100vw !important;
   height: 100vh !important;
   position: fixed;
   top: 0; left: 0;
 }
 svg[data-marpit-svg].active {
-  display: block;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #nav {
