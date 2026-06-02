@@ -18,20 +18,20 @@
   --radius: 14px;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-snap-type:y mandatory; scroll-behavior:smooth; }
-body { background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto Sans KR',sans-serif; }
+html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto Sans KR',sans-serif; }
 
 .slide {
-  min-height:100vh;
-  scroll-snap-align:start;
-  display:flex;
+  display:none;
+  width:100vw;
+  height:100vh;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   padding:60px 80px;
-  border-bottom:1px solid #1a1a2e;
-  position:relative;
+  position:fixed;
+  top:0; left:0;
 }
+.slide.active { display:flex; }
 
 .slide-num { position:absolute; top:24px; right:32px; font-size:11px; color:#333; letter-spacing:2px; }
 .label { font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:14px; }
@@ -106,7 +106,11 @@ body { background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto San
 .info-box p { font-size:15px; color:var(--muted); line-height:2; }
 .info-box strong { color:var(--text); }
 
-.hint { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); font-size:11px; color:#333; letter-spacing:1px; pointer-events:none; }
+.hint { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); font-size:11px; color:#444; letter-spacing:1px; pointer-events:none; }
+#nav { position:fixed; bottom:16px; right:32px; display:flex; gap:10px; align-items:center; z-index:100; }
+#nav button { background:rgba(255,255,255,0.1); color:#fff; border:none; border-radius:6px; padding:6px 16px; cursor:pointer; font-size:14px; }
+#nav button:hover { background:rgba(255,255,255,0.25); }
+#nav span { color:#555; font-size:12px; }
 </style>
 </head>
 <body>
@@ -239,16 +243,27 @@ graph TD
   </div>
 </section>
 
-<div class="hint">↓ 스크롤 또는 화살표 키</div>
+<div class="hint">← → 화살표 키 또는 클릭</div>
+<div id="nav">
+  <button onclick="go(-1)">◀</button>
+  <span id="pinfo"></span>
+  <button onclick="go(1)">▶</button>
+</div>
 
 <script>
 mermaid.initialize({ startOnLoad:true, theme:'dark' });
+const slides = Array.from(document.querySelectorAll('.slide'));
+let cur = 0;
+function show() {
+  slides.forEach((s,i) => s.classList.toggle('active', i===cur));
+  document.getElementById('pinfo').textContent = (cur+1) + ' / ' + slides.length;
+}
+function go(d) { cur = Math.max(0, Math.min(slides.length-1, cur+d)); show(); }
 document.addEventListener('keydown', e => {
-  const slides = document.querySelectorAll('.slide');
-  const cur = Math.round(window.scrollY / window.innerHeight);
-  if (['ArrowDown',' '].includes(e.key)) { e.preventDefault(); if(cur < slides.length-1) window.scrollTo({top:(cur+1)*window.innerHeight,behavior:'smooth'}); }
-  if (e.key === 'ArrowUp') { e.preventDefault(); if(cur > 0) window.scrollTo({top:(cur-1)*window.innerHeight,behavior:'smooth'}); }
+  if (['ArrowRight','ArrowDown',' '].includes(e.key)) { e.preventDefault(); go(1); }
+  if (['ArrowLeft','ArrowUp'].includes(e.key)) { e.preventDefault(); go(-1); }
 });
+show();
 </script>
 </body>
 </html>
