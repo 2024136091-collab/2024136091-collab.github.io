@@ -1,0 +1,11 @@
+# 승강기 정보검색 앱 — 발표 자료
+
+신구대학교 컴퓨터소프트웨어학과 앱프로그래밍응용 12주차 발표 (2024136091 김재호)
+
+## 발표 보기
+
+**[https://num.slogs.dev](https://num.slogs.dev)**
+
+## 앱 소스코드
+
+[https://github.com/2024136091-collab/it_dev](https://github.com/2024136091-collab/it_dev)
