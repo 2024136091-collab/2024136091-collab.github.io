@@ -57,9 +57,9 @@ li { color: #eaeaea; }
 <strong>한 곳에서 빠르게 조회하는 Flutter 앱</strong></p>
 </blockquote>
 <ul>
-<li>플랫폼: Flutter (Android / iOS / Web)</li>
-<li>데이터: 국가승강기정보센터 공공 API</li>
-<li>주요 기능: 검색 · 지역 필터 · 점검 이력 · 즐겨찾기</li>
+<li>플랫폼: Flutter Web <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> · Android / iOS (추후 빌드 예정)</li>
+<li>데이터: 국가승강기정보센터 공공 API 구조 기반</li>
+<li>주요 기능: 검색 · 지역 필터 · 점검 이력 · 즐겨찾기 · 스마트 검색</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" data-background-color="#1a1a2e" data-color="#eaeaea" data-theme="default" data-style="h1 { color: #e94560; }
@@ -142,8 +142,8 @@ li { color: #eaeaea; }
 <td>건물명·주소·승강기 번호로 검색</td>
 </tr>
 <tr>
-<td><strong>AI 자연어 검색</strong></td>
-<td>&quot;오래된 승강기 찾아줘&quot; 같은 문장으로 검색</td>
+<td><strong>스마트 자연어 검색</strong></td>
+<td>키워드 규칙 기반으로 문장형 질의 해석·검색</td>
 </tr>
 <tr>
 <td>지역 필터</td>
@@ -419,7 +419,7 @@ code { background: #0f3460; color: #eaeaea; font-size: 0.8em; }
 blockquote { color: #eaeaea; border-left-color: #e94560; }
 li { color: #eaeaea; }
 ;color:#eaeaea;background-color:#1a1a2e;background-image:none;" data-marpit-pagination-total="16">
-<h2 id="ai-%EC%9E%90%EC%97%B0%EC%96%B4-%EA%B2%80%EC%83%89">AI 자연어 검색</h2>
+<h2 id="%EC%8A%A4%EB%A7%88%ED%8A%B8-%EC%9E%90%EC%97%B0%EC%96%B4-%EA%B2%80%EC%83%89-%EA%B7%9C%EC%B9%99-%EA%B8%B0%EB%B0%98">스마트 자연어 검색 (규칙 기반)</h2>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-dart"><span class="hljs-comment">// Domain — ElevatorService.aiSearch() (규칙 기반 자연어 해석)</span>
 ({<span class="hljs-built_in">List</span>&lt;Elevator&gt; results, <span class="hljs-built_in">String</span> description}) aiSearch(
     <span class="hljs-built_in">List</span>&lt;Elevator&gt; elevators, <span class="hljs-built_in">String</span> query) {
@@ -475,8 +475,8 @@ li { color: #eaeaea; }
 <td>검색창, AI 검색 진입 버튼, 최근 조회</td>
 </tr>
 <tr>
-<td><strong>AI 검색</strong></td>
-<td>자연어 입력, 예시 칩, AI 분석 결과 배너</td>
+<td><strong>스마트 검색</strong></td>
+<td>문장형 입력, 예시 칩, 키워드 분석 결과 배너</td>
 </tr>
 <tr>
 <td>검색 결과</td>
@@ -523,7 +523,7 @@ li { color: #eaeaea; }
 <tbody>
 <tr>
 <td>Flutter</td>
-<td>Android·iOS 단일 코드베이스</td>
+<td>Android·iOS·Web 단일 코드베이스, Web 빌드 완료</td>
 </tr>
 <tr>
 <td>Riverpod</td>
@@ -568,7 +568,7 @@ li { color: #eaeaea; }
 <li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> 홈 · 검색 결과 · 상세 정보 · 즐겨찾기 화면 구현</li>
 <li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> 지역 필터 · 건물 유형 필터 · 승강기 종류 필터 (3단 필터)</li>
 <li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> 건물별 그룹핑 표시</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>AI 자연어 검색 기능</strong> 구현</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>스마트 자연어 검색 기능</strong> 구현 (규칙 기반 키워드 분석)</li>
 <li><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/1f504.svg" data-marp-twemoji=""/> 실제 공공 API 연동 진행 중</li>
 <li><img class="emoji" draggable="false" alt="⬜" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/2b1c.svg" data-marp-twemoji=""/> 지도 위치 조회</li>
 </ul>
