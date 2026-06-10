@@ -199,7 +199,7 @@ li { color: #eaeaea; }
 <tbody>
 <tr>
 <td>Presentation</td>
-<td>Flutter 위젯 (화면 4개)</td>
+<td>Flutter 위젯 (화면 5개)</td>
 <td>UI 표시, 사용자 입력</td>
 </tr>
 <tr>
@@ -346,13 +346,14 @@ li { color: #eaeaea; }
 ;color:#eaeaea;background-color:#1a1a2e;background-image:none;" data-marpit-pagination-total="16">
 <h2 id="%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8">데이터 모델</h2>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-dart"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Elevator</span> </span>{
-  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> id;          <span class="hljs-comment">// 국승정 번호 (XXXX-XXX)</span>
+  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> id;               <span class="hljs-comment">// 국승정 번호 (XXXX-XXX)</span>
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> buildingName;
+  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> buildingCategory; <span class="hljs-comment">// 학교·아파트·오피스·상업시설·병원</span>
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> address;
-  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> type;        <span class="hljs-comment">// 승객용 · 에스컬레이터 · 수직형리프트</span>
+  <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> type;             <span class="hljs-comment">// 승객용·에스컬레이터·수직형리프트</span>
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span>    installYear;
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> manufacturer;
-  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span>    capacity;    <span class="hljs-comment">// 에스컬레이터는 0</span>
+  <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span>    capacity;         <span class="hljs-comment">// 에스컬레이터는 0</span>
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">String</span> lastInspectedAt;
   <span class="hljs-keyword">final</span> <span class="hljs-built_in">bool</span>   isOperating;
 
@@ -419,23 +420,26 @@ blockquote { color: #eaeaea; border-left-color: #e94560; }
 li { color: #eaeaea; }
 ;color:#eaeaea;background-color:#1a1a2e;background-image:none;" data-marpit-pagination-total="16">
 <h2 id="ai-%EC%9E%90%EC%97%B0%EC%96%B4-%EA%B2%80%EC%83%89">AI 자연어 검색</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-dart"><span class="hljs-comment">// Domain — ElevatorService.aiSearch()</span>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-dart"><span class="hljs-comment">// Domain — ElevatorService.aiSearch() (규칙 기반 자연어 해석)</span>
 ({<span class="hljs-built_in">List</span>&lt;Elevator&gt; results, <span class="hljs-built_in">String</span> description}) aiSearch(
     <span class="hljs-built_in">List</span>&lt;Elevator&gt; elevators, <span class="hljs-built_in">String</span> query) {
+  <span class="hljs-keyword">final</span> q = query.toLowerCase();
 
-  <span class="hljs-keyword">if</span> (query.contains(<span class="hljs-string">&#x27;오래된&#x27;</span>) || query.contains(<span class="hljs-string">&#x27;노후&#x27;</span>))
-    <span class="hljs-keyword">return</span> (results: sortedByOldest, description: <span class="hljs-string">&#x27;설치연도 오래된 순&#x27;</span>);
-
-  <span class="hljs-keyword">if</span> (query.contains(<span class="hljs-string">&#x27;장애인&#x27;</span>) || query.contains(<span class="hljs-string">&#x27;휠체어&#x27;</span>))
-    <span class="hljs-keyword">return</span> (results: disabledType, description: <span class="hljs-string">&#x27;장애인용 승강기&#x27;</span>);
-
-  <span class="hljs-keyword">if</span> (query.contains(<span class="hljs-string">&#x27;점검&#x27;</span>) || query.contains(<span class="hljs-string">&#x27;정지&#x27;</span>))
-    <span class="hljs-keyword">return</span> (results: notOperating, description: <span class="hljs-string">&#x27;운행 정지 승강기&#x27;</span>);
-  <span class="hljs-comment">// 병원·학교·화물·전망 등 키워드 처리 ...</span>
+  <span class="hljs-keyword">if</span> (q.contains(<span class="hljs-string">&#x27;오래된&#x27;</span>) || q.contains(<span class="hljs-string">&#x27;노후&#x27;</span>)) {
+    <span class="hljs-keyword">final</span> sorted = [...elevators]
+      ..sort((a, b) =&gt; a.installYear.compareTo(b.installYear));
+    <span class="hljs-keyword">return</span> (results: sorted.take(<span class="hljs-number">5</span>).toList(),
+            description: <span class="hljs-string">&#x27;설치연도가 오래된 순으로 표시합니다.&#x27;</span>);
+  }
+  <span class="hljs-keyword">if</span> (q.contains(<span class="hljs-string">&#x27;장애인&#x27;</span>) || q.contains(<span class="hljs-string">&#x27;휠체어&#x27;</span>))
+    <span class="hljs-keyword">return</span> (results: elevators.where(
+              (e) =&gt; e.type.contains(<span class="hljs-string">&#x27;장애인&#x27;</span>)).toList(),
+            description: <span class="hljs-string">&#x27;장애인용 승강기만 표시합니다.&#x27;</span>);
+  <span class="hljs-comment">// 점검·병원·학교·화물·전망 등 키워드 추가 처리</span>
 }
 </code></pre>
 <blockquote>
-<p>UI: 보라색 AI 테마 / 예시 질문 칩 / &quot;AI 분석 중...&quot; 점 애니메이션</p>
+<p>키워드 미매칭 시 일반 검색으로 fallback / UI: 보라색 AI 테마, 예시 질문 칩, 점 애니메이션</p>
 </blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-background-color="#1a1a2e" data-color="#eaeaea" data-theme="default" data-style="h1 { color: #e94560; }
