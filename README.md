@@ -13,3 +13,7 @@
 ## 앱 소스코드
 
 [https://github.com/2024136091-collab/it_dev](https://github.com/2024136091-collab/it_dev)
+
+## PPT 다운로드
+
+**[elevator.pptx](https://2024136091-collab.github.io/elevator.pptx)**
